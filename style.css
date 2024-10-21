@@ -1,0 +1,202 @@
+.scroll {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background : fixed;
+  width: 90%;
+  height: 500px;
+  border: 2px solid #909090;
+  overflow: auto;
+  font-family: W_yekan;
+  padding-inline-start: 2rem; /* Works for both RTL and LTR */
+  margin: 5rem auto;
+  cursor: grab;
+  direction: var(--dir, ltr); /* Use a variable to switch between LTR and RTL */
+
+  @media only screen and (max-width: 600px) {
+    height: auto;
+    width: 100%;
+  }
+
+  @media only screen and (max-width: 350px) {
+    padding-inline-start: 3rem; /* Adjust for both directions */
+  }
+}
+
+.scroll:active {
+  cursor: grabbing;
+}
+
+.org-chart {
+  width: 700px;
+  direction: var(--dir, ltr); /* Dynamic direction */
+}
+
+.org-chart ul {
+  padding-top: 20px;
+  transition: all 0.5s;
+  display: flex;
+  margin-inline-start: 10px; /* Adjust for both directions */
+}
+
+.org-chart ul ul {
+  padding-top: 20px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.org-chart ul ul::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  inset-inline-start: 50%; /* Dynamic for RTL/LTR */
+  border-inline-start: 2px solid #ccc; /* Dynamic border */
+  width: 0;
+  height: 25px;
+}
+
+.org-chart li {
+  text-align: center;
+  list-style-type: none;
+  position: relative;
+  padding: 20px 15px 0 5px; /* Keep it generic */
+  transition: all 0.5s;
+}
+
+.org-chart li::before,
+.org-chart li::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  border-top: 2px solid #ccc;
+  width: 60%;
+  height: 25px;
+}
+
+.org-chart li::before {
+  inset-inline-end: 50%; /* Works for both RTL and LTR */
+}
+
+.org-chart li::after {
+  inset-inline-start: 50%; /* Adjust dynamically */
+  border-inline-start: 2px solid #ccc;
+}
+
+.org-chart li:only-child::before,
+.org-chart li:only-child::after {
+  display: none;
+}
+
+.org-chart li:only-child {
+  padding-top: 0;
+}
+
+.org-chart li:first-child::before,
+.org-chart li:last-child::after {
+  border: 0 none;
+}
+
+.org-chart li:last-child::before {
+  border-inline-end: 2px solid #ccc;
+  border-radius: 0 5px 0 0;
+}
+
+.org-chart li:first-child::after {
+  border-radius: 5px 0 0 0;
+}
+
+#node {
+  display: block;
+}
+
+.org-chart .node {
+  user-select: none;
+  width: 190px;
+  height: auto;
+  padding: 3px;
+  z-index : 9;
+  border: 2px solid #ccc;
+  display: inline-flex;
+  border-radius: 5px;
+  cursor: default;
+  background-color: #f3f3f3;
+  position: relative;
+  transition: all 0.5s;
+}
+
+.org-chart .node:hover{
+  background-color: #ccc;
+}
+
+.org-chart .node img {
+  width: 60px;
+  height: auto;
+  object-fit: cover;
+}
+
+.org-chart .node p {
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  direction: var(--dir, ltr); /* Dynamic direction for text */
+}
+
+#bossNode:hover .node {
+  background-color: #d9d9d9;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  border: 2px solid #bcbcbc;
+}
+
+.org-chart .node span {
+  display: block;
+  font-size: 12px;
+  color: #666;
+  direction: var(--dir, ltr); /* Dynamic direction for span */
+}
+
+.org-chart .node a {
+  color: rgb(255, 81, 81);
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.org-chart .node .flex {
+  margin: auto;
+  margin-top: -3px;
+}
+
+.zoom-buttons {
+  width: 570px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: auto;
+
+  @media only screen and (max-width: 690px) {
+    width: 90%;
+    flex-direction: column;
+    margin-top: -3rem;
+  }
+}
+
+.zoom-buttons > button {
+  font-size: 1rem;
+  width: 130px;
+  height: 50px;
+  border-radius: 1rem;
+  background: fixed;
+  border: 2px solid rgb(255, 81, 81);
+  cursor: pointer;
+  transition: color 0.5s, background 0.5s;
+
+  @media only screen and (max-width: 690px) {
+    width: 90%;
+    margin-top: 1rem;
+  }
+}
+
+.zoom-buttons > button:hover {
+  background: rgb(255, 81, 81);
+  color: #fff;
+}
